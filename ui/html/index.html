@@ -1,0 +1,19 @@
+{{template "base" .}}
+
+<div class="container-group">
+  {{range .}}
+  <div class="item-group">
+      <a href="/group?id={{.ID}}"><img src={{.Image}} ></a> <br>
+      <div class="text-div">
+      <a class="text-group-name" href="/group?id={{.ID}}">{{.Name}}</a>
+      </div>
+  </div>
+  {{end}}
+</div>
+
+<footer class="footer">Groupie tracker visualizations <br>
+  <a class="footer-text" href='https://01.alem.school/git/dtyuligu'>Diana Tyuligulova</a>
+</footer>
+
+</body>
+</html>
