@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"text/template"
 )
 
 var Groups = make([]Groupie, 0)
@@ -46,30 +47,46 @@ func getLocation() {
 		Index []Location `json:"index"`
 	}
 
-	temp := t{
-		Index: make([]Location, 0),
-	}
-
-	url := "https://groupietrackers.herokuapp.com/api/locations"
-
-	idData, err := getData(url)
+	tmpl, err := template.ParseFiles("ui/html/errpage.html", "ui/html/layout.html")
 	if err != nil {
-		log.Fatal(err)
+		// http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 		return
 	}
 
-	err = json.Unmarshal(idData, &temp)
+	fmt.Println(tmpl)
+
+	// err = tmpl.Execute(w, e)
+
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("what error??", err)
+		// http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
 	}
-	if len(Groups) != len(temp.Index) {
-		log.Fatal("error: lengths of locations and groups are different")
-		return
-	}
-	for id := range Groups {
-		Groups[id].Locations = temp.Index[id]
-	}
+
+	// temp := t{
+	// 	Index: make([]Location, 0),
+	// }
+
+	// url := "https://groupietrackers.herokuapp.com/api/locations"
+
+	// idData, err := getData(url)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// 	return
+	// }
+
+	// err = json.Unmarshal(idData, &temp)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// 	return
+	// }
+	// if len(Groups) != len(temp.Index) {
+	// 	log.Fatal("error: lengths of locations and groups are different")
+	// 	return
+	// }
+	// for id := range Groups {
+	// 	Groups[id].Locations = temp.Index[id]
+	// }
 }
 
 func getRelations() {
