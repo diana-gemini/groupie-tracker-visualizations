@@ -29,6 +29,7 @@ func ParseData() {
 	}
 	fmt.Println("1235")
 
+	fmt.Println("65789")
 	err = json.Unmarshal(jsonData, &Groups)
 	if err != nil {
 		log.Fatal(err)
