@@ -34,6 +34,8 @@ func ParseData() {
 		log.Fatal(err)
 		return
 	}
+
+	fmt.Println("dfjhsdfsdf")
 	getLocation()
 	getRelations()
 	getConcertDates()
